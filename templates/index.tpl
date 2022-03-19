@@ -23,7 +23,7 @@
         <form action="index.php" method="post">
             <label for="title">Titre de l'album : <input type="text" name="title" id="title"></label>
             <label for="artist">Artiste : <input type="text" name="artist" id="artist"></label>
-            <label for="genre">Titre de l'album : <input type="text" name="genre" id="genre"></label>
+            <label for="genre">Genre : <input type="text" name="genre" id="genre"></label>
             <button type="submit">Ajouter</button>
         </form>
     </div>
