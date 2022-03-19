@@ -18,5 +18,14 @@
             <p>Il n'y a pas d'albums</p>
         {/if}
     </div>
+    <div class="FormAddAlbum">
+        <h2>Ajouter un album</h2>
+        <form action="index.php" method="post">
+            <label for="title">Titre de l'album : <input type="text" name="title" id="title"></label>
+            <label for="artist">Artiste : <input type="text" name="artist" id="artist"></label>
+            <label for="genre">Titre de l'album : <input type="text" name="genre" id="genre"></label>
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
 </body>
 </html>
