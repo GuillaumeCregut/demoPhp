@@ -15,6 +15,23 @@
        echo "<p>connexion impossible</p>";
     }
     $id=0;
+    if (!empty($_POST)){
+        if(isset($_POST['id']))
+            $id=intval($_POST['id']);
+        if(isset($_POST['title']))
+            $title=htmlspecialchars($_POST['title'],ENT_NOQUOTES,'UTF-8');
+        else
+            $title='';
+        if ($id!==0&&$title!==''){
+            $sqlPostTrack="INSERT INTO track (title,id_album) VALUES (:title,:id_album)";
+            $ArrayVarTrack=array(':title'=>$title,':id_album'=>$id);
+            $sth=$connectId->prepare($sqlPostTrack);
+            $result=$sth->execute($ArrayVarTrack);
+            if(!$result){
+                echo "<p>Ajout impossible</p>";
+            }
+        }
+    }
     if(!empty($_GET)){
         //Get album infos and tracks from album
         if(isset($_GET['id'])){
