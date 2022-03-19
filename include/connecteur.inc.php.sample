@@ -1,0 +1,6 @@
+<?php
+$DataBaseName = "yourDB";
+$DataBaseUser = 'yourUser';
+$DataBasePass = 'yourPass';
+$DataBaseServeur='yourHost';
+?>
