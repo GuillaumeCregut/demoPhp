@@ -48,7 +48,7 @@
     }
     
     //Getting all albums
-    $getAllAlbums='SELECT title, genre, picture, artist FROM album ORDER BY artist,title';
+    $getAllAlbums='SELECT id,title, genre, artist FROM album ORDER BY artist,title';
     //Execute request
     $sth=$connectId->prepare($getAllAlbums);
     $sth->execute();
