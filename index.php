@@ -3,7 +3,6 @@
     include "include/Smarty.class.php";
     //Template connection
     $templateGenerator=new Smarty();
-
     //DB connection
     try
     {
@@ -15,6 +14,39 @@
     {
        echo "<p>connexion impossible</p>";
     }
+    //checking if post datas
+    //var_dump($_POST);
+    if(!empty($_POST)){
+        if(isset($_POST['title'])){
+            $albumTitle=htmlspecialchars($_POST['title'],ENT_NOQUOTES,'UTF-8');
+        }
+        else
+            $albumTitle='';
+        if(isset($_POST['artist'])){
+            $artistName=htmlspecialchars($_POST['artist'],ENT_NOQUOTES,'UTF-8');
+        }
+        else
+            $artistName='';
+        if(isset($_POST['genre']))
+            $genre=htmlspecialchars($_POST['genre'],ENT_NOQUOTES,'UTF-8');
+        else
+            $genre='';
+        if($albumTitle==='' or $genre==='' or $artistName==='')
+        {
+            echo "Veuillez saisir tous les champs";
+        }
+        else{
+            //Adding album to DB
+            $SQL="INSERT INTO album (title,genre,artist) VALUES (:title,:genre,:artist)";
+            $arrayValues=array(':title'=>$albumTitle,':genre'=>$genre,':artist'=>$artistName);
+            $sth=$connectId->prepare($SQL);
+            $result=$sth->execute($arrayValues);
+            if(!$result){
+                echo "<p>Ajout impossible</p>";
+            }
+        }
+    }
+    
     //Getting all albums
     $getAllAlbums='SELECT title, genre, picture, artist FROM album ORDER BY artist,title';
     //Execute request
