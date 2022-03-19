@@ -15,11 +15,23 @@
         <h2>Liste des pistes de l'album</h2>
         {if isset($tracksArray)}
             {foreach from=$tracksArray item=infos}
-                <p>{$infos.title}</p>
+                <div class="listTracks">
+                    <p>- {$infos.title}</p>
+                </div>
             {/foreach}
         {else} 
             <p>Pas de titre dans cet album</p>
         {/if}
+        <div class="FormAddTrack">
+            <h3>Ajouter une piste</h3>
+            <form action="album.php" method="post">
+                <input type="hidden" name="id" value="{$Album.id}">
+                <div class="FormAddTrackInputs">
+                    <label for="title">Titre : <input type="text" name="title" id="title"></label>
+                    <input type="submit" value="Ajouter">
+                </div>
+            </form>
+        </div>
     {else} 
         <p>Pas d'information sur cet album</p>
     {/if}

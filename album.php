@@ -14,33 +14,33 @@
     {
        echo "<p>connexion impossible</p>";
     }
+    $id=0;
     if(!empty($_GET)){
         //Get album infos and tracks from album
         if(isset($_GET['id'])){
             $id=intval($_GET['id']);
-            $SQL="SELECT id,title, genre, artist FROM album WHERE Id=:id";
-            $arrayValue=array(':id'=>$id);
-            $sth=$connectId->prepare($SQL);
-            $sth->execute($arrayValue);
-            //Get one result
-            $albumInfo=$sth->fetch(PDO::FETCH_ASSOC);
-            if(!empty($albumInfo)){
-                $templateGenerator->assign('Album',$albumInfo);
-                //Getting all tracks for this album
-                $getAllTracks="SELECT id,title FROM track WHERE id_album=:id";
-                $sth=$connectId->prepare($getAllTracks);
-                $sth->execute($arrayValue);
-                $result=$sth->fetchAll();
-                if(!empty($result)){
-                    $templateGenerator->assign('tracksArray',$result);
-                }
-            }
-            $templateGenerator->display('album.tpl');
-        }
-        else{
-            $templateGenerator->display('index.tpl');
         }
     }
+    if($id!=0){
+        $SQL="SELECT id,title, genre, artist FROM album WHERE Id=:id";
+        $arrayValue=array(':id'=>$id);
+        $sth=$connectId->prepare($SQL);
+        $sth->execute($arrayValue);
+        //Get one result
+        $albumInfo=$sth->fetch(PDO::FETCH_ASSOC);
+        if(!empty($albumInfo)){
+            $templateGenerator->assign('Album',$albumInfo);
+            //Getting all tracks for this album
+            $getAllTracks="SELECT id,title FROM track WHERE id_album=:id";
+            $sth=$connectId->prepare($getAllTracks);
+            $sth->execute($arrayValue);
+            $result=$sth->fetchAll();
+            if(!empty($result)){
+                $templateGenerator->assign('tracksArray',$result);
+            }
+        }
+        $templateGenerator->display('album.tpl');
+    }    
     else{
         $templateGenerator->display('index.tpl');
     }
