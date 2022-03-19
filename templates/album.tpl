@@ -18,7 +18,14 @@
             <div class="listTracksDiv">
             <ul class="listTracks">
             {foreach from=$tracksArray item=infos}   
-                    <li>{$infos.title}</li>    
+                    <li class="ItemTrack">{$infos.title}
+                        <form action="album.php" method="post">
+                            <input type="submit" value="Supprimer" class="BtnDelete">
+                            <input type="hidden" name="id_track" value="{$infos.id}">
+                            <input type="hidden" name="action" value="2">
+                            <input type="hidden" name="id" value="{$Album.id}">
+                        </form>
+                    </li>    
             {/foreach}
             </ul>
             </div>
@@ -28,6 +35,7 @@
         <div class="FormAddTrack">
             <h3>Ajouter une piste</h3>
             <form action="album.php" method="post">
+                <input type="hidden" name="action" value="1">
                 <input type="hidden" name="id" value="{$Album.id}">
                 <div class="FormAddTrackInputs">
                     <label for="title">Titre : <input type="text" name="title" id="title"></label>

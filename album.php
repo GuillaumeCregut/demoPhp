@@ -16,20 +16,43 @@
     }
     $id=0;
     if (!empty($_POST)){
+        $action=0;
+        if(isset($_POST['action']))
+        {
+            $action=intval($_POST['action']);
+        }
         if(isset($_POST['id']))
-            $id=intval($_POST['id']);
-        if(isset($_POST['title']))
-            $title=htmlspecialchars($_POST['title'],ENT_NOQUOTES,'UTF-8');
-        else
-            $title='';
-        if ($id!==0&&$title!==''){
-            $sqlPostTrack="INSERT INTO track (title,id_album) VALUES (:title,:id_album)";
-            $ArrayVarTrack=array(':title'=>$title,':id_album'=>$id);
-            $sth=$connectId->prepare($sqlPostTrack);
-            $result=$sth->execute($ArrayVarTrack);
-            if(!$result){
-                echo "<p>Ajout impossible</p>";
-            }
+        $id=intval($_POST['id']);
+        switch($action){
+            case 1 : 
+                if(isset($_POST['title']))
+                    $title=htmlspecialchars($_POST['title'],ENT_NOQUOTES,'UTF-8');
+                else
+                    $title='';
+                if ($id!==0&&$title!==''){
+                    $sqlPostTrack="INSERT INTO track (title,id_album) VALUES (:title,:id_album)";
+                    $ArrayVarTrack=array(':title'=>$title,':id_album'=>$id);
+                    $sth=$connectId->prepare($sqlPostTrack);
+                    $result=$sth->execute($ArrayVarTrack);
+                    if(!$result){
+                        echo "<p>Ajout impossible</p>";
+                    }
+                }
+                break;
+            case 2 : 
+                if(isset($_POST['id_track'])){
+                    $idTrack=intval($_POST['id_track']);
+                    $sqlDeleteTrack="DELETE FROM track WHERE id=:id";
+                    $ArrayVarTrack=array(':id'=>$idTrack);
+                    $sth=$connectId->prepare($sqlDeleteTrack);
+                    $result=$sth->execute($ArrayVarTrack);
+                    if(!$result){
+                        echo "<p>Suppression impossible impossible</p>";
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
     if(!empty($_GET)){
