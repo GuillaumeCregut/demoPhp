@@ -11,11 +11,12 @@
     <h2>Liste des albums de la CDthèque</h2>
     <div class="ListAlbum">
         {if isset($AlbumArray)}
-
-        {/if}
+            {foreach from=$AlbumArray item=album}
+                <p>{$album.title} - {$album.artist}</p>
+            {/foreach}
         {else}
-
-        {/else}
+            <p>Il n'y a pas d'albums</p>
+        {/if}
     </div>
 </body>
 </html>
