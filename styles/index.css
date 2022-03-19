@@ -1,0 +1,31 @@
+h1{
+    text-align: center;
+}
+.ListAlbum{
+    margin: 10px auto;
+    border : solid 1px black;
+    padding: 10px;
+    width: 50%;
+
+}
+
+.FormAddAlbum{
+    display: flex;
+    flex-direction: column;
+}
+
+.FormInputs{
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    border: 1px solid black;
+    margin : 0 auto;
+    padding :10px;
+}
+label{
+    margin: 5px;
+}
+
+.Btn{
+    width: 70px;
+}
