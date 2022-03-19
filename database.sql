@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `album` (
 CREATE TABLE IF NOT EXISTS `track` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(128) NOT NULL,
-  `youtube_url` varchar(255) NOT NULL,
+  `youtube_url` varchar(255)  NULL,
   `id_album` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_track_album` (`id_album`)
