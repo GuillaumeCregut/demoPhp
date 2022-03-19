@@ -59,7 +59,7 @@
         $templateGenerator->display('album.tpl');
     }    
     else{
-        $templateGenerator->display('index.tpl');
+        $templateGenerator->display('error.tpl');
     }
 
 ?>
