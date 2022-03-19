@@ -13,7 +13,7 @@
     <div class="ListAlbum">
         {if isset($AlbumArray)}
             {foreach from=$AlbumArray item=album}
-                <p>{$album.title} - {$album.artist}</p>
+                <p><a href="album.php?id={$album.id}">{$album.title} - {$album.artist} - {$album.genre}</a></p>
             {/foreach}
         {else}
             <p>Il n'y a pas d'albums</p>
