@@ -6,27 +6,53 @@
     //DB connection
     try
     {
-        //On passe au PDO le type de serveur et son nom, nom BDD, username, pwd, et un tableau de configuration.
         $connectId =new PDO('mysql:host='.$DataBaseServeur.';dbname='.$DataBaseName.';charset=UTF8',$DataBaseUser,$DataBasePass,array( PDO::ATTR_PERSISTENT => true,PDO::MYSQL_ATTR_FOUND_ROWS=>TRUE));
-        //On configure l'objet PDO local
         $connectId->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $connectId->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "<p>Connexion OK</p>";
     }
     catch(PDOException $e)
     {
        echo "<p>connexion impossible</p>";
     }
-    //Display Title
-    echo "<h1>Hello World</p>";
+    //checking if post datas
+    //var_dump($_POST);
+    if(!empty($_POST)){
+        if(isset($_POST['title'])){
+            $albumTitle=htmlspecialchars($_POST['title'],ENT_NOQUOTES,'UTF-8');
+        }
+        else
+            $albumTitle='';
+        if(isset($_POST['artist'])){
+            $artistName=htmlspecialchars($_POST['artist'],ENT_NOQUOTES,'UTF-8');
+        }
+        else
+            $artistName='';
+        if(isset($_POST['genre']))
+            $genre=htmlspecialchars($_POST['genre'],ENT_NOQUOTES,'UTF-8');
+        else
+            $genre='';
+        if($albumTitle==='' or $genre==='' or $artistName==='')
+        {
+            echo "Veuillez saisir tous les champs";
+        }
+        else{
+            //Adding album to DB
+            $SQL="INSERT INTO album (title,genre,artist) VALUES (:title,:genre,:artist)";
+            $arrayValues=array(':title'=>$albumTitle,':genre'=>$genre,':artist'=>$artistName);
+            $sth=$connectId->prepare($SQL);
+            $result=$sth->execute($arrayValues);
+            if(!$result){
+                echo "<p>Ajout impossible</p>";
+            }
+        }
+    }
+    
     //Getting all albums
-    $getAllAlbums='SELECT title, genre, picture, artist FROM album ORDER BY artist,title';
+    $getAllAlbums='SELECT id,title, genre, artist FROM album ORDER BY artist,title';
     //Execute request
     $sth=$connectId->prepare($getAllAlbums);
     $sth->execute();
     $result=$sth->fetchAll();
-    //var_dump($result);
-    foreach($result as $album){
-        echo "<p>Album : ".$album['title']."</p>";
-    }
+    $templateGenerator->assign('AlbumArray',$result);
+    $templateGenerator->display('templates/index.tpl');
 ?>

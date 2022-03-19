@@ -3,9 +3,7 @@
     //DB connection
     try
     {
-        //On passe au PDO le type de serveur et son nom, nom BDD, username, pwd, et un tableau de configuration.
         $connectId =new PDO('mysql:host='.$DataBaseServeur.';dbname='.$DataBaseName.';charset=UTF8',$DataBaseUser,$DataBasePass,array( PDO::ATTR_PERSISTENT => true,PDO::MYSQL_ATTR_FOUND_ROWS=>TRUE));
-        //On configure l'objet PDO local
         $connectId->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $connectId->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "<p>Connexion OK</p>";

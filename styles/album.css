@@ -1,0 +1,15 @@
+h1{
+    text-align: center;
+}
+
+.listTracksDiv{
+    margin-left: 10px;
+}
+
+.ItemTrack{
+    display :flex;
+}
+
+.BtnDelete{
+    margin-left: 5px;
+}
