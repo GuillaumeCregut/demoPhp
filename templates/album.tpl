@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/album.css">
     <title>Album</title>
 </head>
 <body>
@@ -14,11 +15,13 @@
         <p>Genre : {$Album.genre}</p>
         <h2>Liste des pistes de l'album</h2>
         {if isset($tracksArray)}
-            {foreach from=$tracksArray item=infos}
-                <div class="listTracks">
-                    <p>- {$infos.title}</p>
-                </div>
+            <div class="listTracksDiv">
+            <ul class="listTracks">
+            {foreach from=$tracksArray item=infos}   
+                    <li>{$infos.title}</li>    
             {/foreach}
+            </ul>
+            </div>
         {else} 
             <p>Pas de titre dans cet album</p>
         {/if}
